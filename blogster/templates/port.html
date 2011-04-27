@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block meta %}
+<meta name="keywords" content="Freelance Web Designer, Freelance, Tasarım, Web Tasarımı, CSS, XHTML, Fireworks, Dreamweaver, Photoshop, Flash,  Banner, Kartvizit, Mailing Tasarımı, SEO" /> 
+<meta name="description" content="Yasin YAMAN'nın freelance web tasarım alanındaki becerilerini duyurma çabası ile oluşturduğu kişisel site." />
+{% endblock %}
+{% block baslik %}
+Portfolyo
+{% endblock %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="/static/css/lightwindow.css" />
+{% endblock %}
+{% block javasc %}
+<script type="text/javascript" src="/static/javascript/prototype.js"></script>
+<script type="text/javascript" src="/static/javascript/effects.js"></script>
+<script type="text/javascript" src="/static/javascript/lightwindow.js"></script>
+{% endblock %}
+{% block main %}
+<table width="791" height="%100" border="0" cellpadding="0" cellspacing="0">
+{%for bilgial in kayitlarport%}
+<tr>
+            <td width="434" rowspan="5" align="left"><a href="/static/images/{{bilgial.buyukresim}}" class="lightwindow page-options" title="{{bilgial.isadi}}" author="{{bilgial.yapan}}" caption=""><img src="/static/images/{{bilgial.kucukresim}}" width="418" height="120" border="0"/></a></td>
+            <td width="89" height="25">İş adı                   </td>
+            <td width="10" >:</td>
+            <td width="258">{{bilgial.isadi}}</td>
+          </tr>
+          <tr>
+            <td height="26">Kullanılan araçlar </td>
+            <td>:</td>
+            <td>{{bilgial.araclar}}</td>
+          </tr>
+          <tr>
+            <td height="28">Tarih                       </td>
+            <td>:</td>
+            <td>{{bilgial.tarih}}       </td>
+          </tr>
+          <tr>
+            <td height="25">Çevrim içi</td>
+            <td>:</td>
+            <td>{{bilgial.durum}}</td>
+          </tr>
+          <tr>
+            <td height="23">Tam Halini Gör »</td>
+            <td>:</td>
+            <td><a href="{{bilgial.tamhali}}" target="_blank">{{bilgial.tamhali}}</a></td>
+          </tr>
+          <tr align="left">
+            <td height="30">&nbsp;</td>
+          </tr>
+{%endfor%}
+		          
+        </table>
+{% endblock %}

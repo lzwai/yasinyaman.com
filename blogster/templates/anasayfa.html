@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block baslik %}
+
+{%for bilgial in kayitlarana%}
+{% autoescape off %}{{bilgial.konu}}{% endautoescape %}
+{%endfor%}
+
+{% endblock %}
+{% block meta %}
+<meta name="keywords" content="Freelance Web Designer, Freelance, Tasarım, Web Tasarımı, CSS, XHTML, Fireworks, Dreamweaver, Photoshop, Flash,  Banner, Kartvizit, Mailing Tasarımı, SEO" /> 
+<meta name="description" content="Yasin YAMAN'nın freelance web tasarım alanındaki becerilerini duyurma çabası ile oluşturduğu kişisel site." />
+{% endblock %}
+
+{% block main %}
+
+{%for bilgial in kayitlarana%}
+{% autoescape off %}{{bilgial.icerik}}{% endautoescape %}
+{%endfor%}
+
+{% endblock %}

@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+{%load humanize%}
+{% load markup %}
+
+{% block meta %}
+<meta name="keywords" content="{{detay.konu}}" /> 
+<meta name="description" content="{{detay.konu}}" />
+{% endblock %}
+{% block baslik %}
+MiniBlog - {{detay.konu}}
+{% endblock %}
+{% block css %}
+<style> 
+
+font-family:Verdana, Arial, Helvetica, sans-serif;
+font-size:11px;}
+.genislik {margin:auto;}
+
+
+</style> 
+{% endblock %}
+{% block javasc %}
+<SCRIPT language=JavaScript> 
+function regKontrol(pattern, value) 
+{ 
+r = new RegExp(pattern, "g"); 
+return r.test(value); 
+} 
+ 
+function formKontrol(form) 
+{ 
+patternEposta = "^"+"([abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0-9_\.\-]+)"+"@"+"([abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0-9_\.\-]+)"+"[\.]"+"([abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0-9_\.\-]+)"+"$"; 
+ 
+if ( !regKontrol(patternEposta,form.email.value)) 
+{ 
+alert("Lütfen Doğru Bir E-posta Adresi Giriniz."); 
+form.email.value=""; 
+form.email.focus(); 
+return false; 
+} 
+return true; 
+} 
+</SCRIPT> 
+<script type="text/javascript" src="/static/md5_has_create.js"></script> 
+{% endblock %}
+{% block main %}
+<table width="%100" border="0" cellpadding="0" cellspacing="0">
+  <tr>
+    <td height="25" colspan="4" valign="bottom" bgcolor="#f0f0f0"><h3 class="style2" style=" color: #666699;">{{detay.konu}}</h3></td>
+  </tr>
+  <tr>
+    <td height="44" colspan="4" valign="middle" bgcolor="#f9f9f9"><div align="justify" style="border-collapse: collapse; font-family: Arial,sans-serif; font-size: small; color: #000000">{{detay.icerik|safe}}</div></td>
+  </tr>
+  <tr>
+    <td width="447" height="27" bgcolor="#F3F3F3"><strong>Yayin Tarihi:</strong> {{detay.tarih}} </td>
+    <td width="307" bgcolor="#F3F3F3"><strong>Ekleye:</strong> {{detay.user}}</td>
+    <td width="106" bgcolor="#F3F3F3"><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" /></a></td>
+    <td  bgcolor="#F3F3F3">
+<a class="addthis_button" href="http://www.addthis.com/bookmark.php?v=250&amp;username=xa-4b67040a366222fd"><img src="http://s7.addthis.com/static/btn/v2/lg-share-en.gif" width="125" height="16" alt="Bookmark and Share" style="border:0"/></a><script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#username=xa-4b67040a366222fd"></script></td>
+  </tr>
+  <tr>
+    <td colspan="4">
+<iframe src="http://www.facebook.com/plugins/like.php?href=http://www.yasinyaman.com/blogs/{{detay.slug}}&amp;layout=standard&amp;show_faces=true&amp;width=450&amp;action=like&amp;font=verdana&amp;colorscheme=dark&amp;height=80" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:450px; height:80px;" allowTransparency="true"></iframe>
+</td>
+  </tr>
+</table>
+<br/>
+<h2>"{{detay.konu}}" İle İlgili Yorumlar:</h2>
+{%for yorum in detay.yorum_set.all%}
+
+<hr>
+<p>
+<table  border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td rowspan="3" height="51px" width="51px"><img src="http://www.gravatar.com/avatar/{{yorum.smd5}}.png" width="50" height="50"/></td>
+    <td>{{yorum.tarih}}</td>
+  </tr>
+  <tr>
+    <td><strong style="font-size:small;">{{yorum.isim}} Diyor ki;</strong></td>
+  </tr>
+</table>
+<br/><div align="justify" style="border-collapse: collapse; font-family: Arial,sans-serif; font-size: small; color: #777777">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{yorum.mesaj}}</div><p/>
+
+{%endfor%}
+<br />
+<hr>
+<h2>Yorum Yaz:</h2>
+<form method="post" action="" onsubmit="return formKontrol(this);" style="width:610px;"> 
+<input name="konu"  type="hidden" value="{{detay.id}}" id="id_konu" />
+<input name="ip"  type="hidden" value="{{ipa}}" id="id_ip" />
+<input name="smd5"  type="hidden" id="id_smd5" />
+<label><input type="text" name="isim" id="id_isim"  title="Isim / Nick" style=" border:none; width:300px; border:solid; border-width:thin; border-color:#999999;" />&nbsp;&nbsp;<strong>İsim</strong></label><br/>
+<label><input type="text" name="email" id="id_email"  style="border:none; width:300px;border:solid;border-width:thin;  border-color:#999999;"/>&nbsp;&nbsp;<strong>E Posta (Yayınlanmaz)</strong></label> 
+<br /> 
+<textarea id="id_mesaj"  name="mesaj" placeholder="Mesaj"  style="width:600px; height:70px; border:solid; border-width:thin; border-color:#999999;" ></textarea> 
+<br /> <div align="left"> 
+<input  value="Gönder" style="border:solid; border-width:thin; border-color:#999999;" type="submit"  onclick="smd5.value = hex_md5(email.value)"/><div> 
+ </form><p> 
+
+{% endblock %}

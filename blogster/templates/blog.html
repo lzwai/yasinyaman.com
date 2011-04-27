@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{%load humanize%}
+{% load pagination_tags %}
+{% load markup %}
+{% block meta %}
+<meta name="keywords" content="{%for bilgial in kayitlar%}{{bilgial.slug}}, {%endfor%}" /> 
+<meta name="description" content="Yasin YAMAN'nın freelance web tasarım alanındaki becerilerini duyurma çabası ile oluşturduğu kişisel MiniBlok'u." />
+<style>
+
+</style>
+{% endblock %}
+{% block baslik %}
+MiniBlog
+{% endblock %}
+{% block main %}
+<div class="blog"><h3><a href="/blogs"><img src="/static/blogb.png" border="0" /></a> <a href="/arsivblogs"><img src="/static/arsivb.png" border="0" /></a></h3></div>
+<table width="%100" border="0" cellpadding="0" cellspacing="0">
+{%autopaginate kayitlar 10 %}
+{%for bilgial in kayitlar%}
+  <tr>
+    <td height="25" colspan="3" valign="bottom" bgcolor="#f0f0f0"><h3 class="style2" style=" color: #666699;">{{bilgial.konu}}</h3></td>
+  </tr>
+  <tr>
+    <td height="44" colspan="3" valign="middle" bgcolor="#f9f9f9"><div align="justify" style="border-collapse: collapse; font-family: Arial,sans-serif; font-size: small; color: #000000">{{bilgial.icerikozet|textile|safe}}</div>
+<h3>
+<a href="/blogs/{{bilgial.slug}}"><u>(Devamini Oku)</u><a/></h3></td>
+  </tr>
+ <tr>
+    <td width="447" height="27" bgcolor="#F3F3F3"><strong>Yayin Tarihi:</strong> {{bilgial.tarih}} </td>
+    <td width="667" bgcolor="#F3F3F3"><strong>Ekleye:</strong> {{bilgial.user}}</td>
+    <td width="163" bgcolor="#F3F3F3">&nbsp;</td>
+  </tr>
+  <tr>
+    <td colspan="2"><p></td>
+  </tr>
+  {%endfor%}
+</table>
+<strong>{% paginate %}</strong>
+{% endblock %}

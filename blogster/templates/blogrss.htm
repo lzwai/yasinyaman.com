@@ -1,0 +1,27 @@
+{%load humanize%}
+{% load markup %}
+<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/"> 
+	<channel> 
+		<title>yasinyaman.com</title> 
+		<link>http://yasinyaman.com/blogs/</link> 
+		<description>Yasin MiniBlok'u</description> 
+		<language>tr</language> 
+		<generator>Yasin YAMAN Mini Blog</generator> 
+		<ttl>60</ttl> 
+		<image> 
+			<url>http://forum.shiftdelete.net/sd/misc/rss.jpg</url> 
+			<title>SDN</title> 
+			<link>yasinyaman.com</link> 
+		</image> 
+{%for bilgial in kayitlarrss%}
+<item> 
+<title>{{bilgial.konu}}</title> 
+<link>http://www.yasinyaman.com/blogs/{{bilgial.slug}}</link> 
+<pubDate>{{bilgial.tarih}}</pubDate> 
+<content:encoded><![CDATA[ {{bilgial.icerikozet|textile|safe}} ]]></content:encoded> 
+<dc:creator>{{bilgial.user}}</dc:creator> 
+<guid isPermaLink="true">http://www.yasinyaman.com/blogs/{{bilgial.slug}}</guid> 
+</item> 
+  {%endfor%}
+</channel> 
+</rss>

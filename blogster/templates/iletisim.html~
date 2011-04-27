@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% block main %}
+{%for bilgial in kayitlarilet%}
+{{bilgial.icerik}}
+{%endfor%}
+{% endblock %}

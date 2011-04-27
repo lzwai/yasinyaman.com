@@ -1,0 +1,18 @@
+﻿{% load markup %}
+<?xml version="1.0" encoding="ISO-8859-9"?>
+<rss version="0.92" xml:lang="tr-TR">
+	<channel>
+		<title>yasinyaman.com MiniBlog</title>
+		<link>http://www.yasinyaman.com/blogs/</link>
+		<description><![CDATA[Yasin YAMAN MiniBloG Paylaşımlar]]></description>
+		{%for bilgialrss in kayitlarrss%}
+		<item>
+			<title><![CDATA[{{bilgialrss.konu}}]]></title>
+			<link>http://www.yasinyaman.com/blogs/{{bilgialrss.slug}}</link>
+			<description><![CDATA[{{bilgialrss.icerikozet}}]]></description>
+			<author>{{bilgialrss.user}}</author>
+		</item>
+		{%endfor%}
+	</channel>
+
+</rss>
